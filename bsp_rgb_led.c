@@ -1,6 +1,7 @@
 
 #include "bsp_rgb_led.h"
 #include <zephyr/device.h>
+#include <zephyr/kernel.h>
 #include <zephyr/drivers/gpio.h>
 
 #define PIN_NUM 8
@@ -14,10 +15,15 @@ static const struct device *gpio_ct_dev = DEVICE_DT_GET(DT_NODELABEL(gpio0));
 // https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf
 #define SEND0()     SET_PIN(1);DELAY(8);SET_PIN(0);DELAY(25)
 #define SEND1()     SET_PIN(1);DELAY(22);SET_PIN(0);DELAY(9)
-#define RESET()     SET_PIN(0);DELAY(1500)
+#define RESET()     SET_PIN(0);k_usleep(50)
 
 uint8_t bsp_rgb_led_init(void) {
 	int32_t ret;
+	bsp_rgb_led_color_s val = {
+		.r = 0,
+		.g = 0,
+		.b = 0
+	};
 
 	if(!device_is_ready(gpio_ct_dev)) {
 		return 1;
@@ -28,6 +34,10 @@ uint8_t bsp_rgb_led_init(void) {
 		PIN_NUM,
 		GPIO_OUTPUT_ACTIVE
 	);
+	RESET();
+	if(ret == 0) {
+		bsp_rgb_led_set(&val);
+	}
 
 	return ret;
 }
@@ -37,7 +47,6 @@ void bsp_rgb_led_set(bsp_rgb_led_color_s *val) {
 	data |= (val->g << 16);
 	data |= (val->r << 8);
 	data |= val->b;
-	RESET();
 	for(uint8_t i = 0; i < 24; ++i) {
 		if(data & (0x800000)) { // check 23th bit
 			SEND1();
@@ -45,5 +54,36 @@ void bsp_rgb_led_set(bsp_rgb_led_color_s *val) {
 			SEND0();
 		}
 		data = data << 1;
+	}
+	RESET();
+}
+
+void bsp_rgb_led_change(void) {
+	static bsp_rgb_led_color_s val = {
+		.r = 0,
+		.g = 0,
+		.b = 0
+	};
+	static uint8_t valIdx = 0;
+	val.r = 0;
+	val.g = 0;
+	val.b = 0;
+	switch(valIdx) {
+		case 0:
+			val.r = 255;
+		break;
+		case 1:
+			val.g = 255;
+		break;
+		case 2:
+			val.b = 255;
+		break;
+	}
+
+	bsp_rgb_led_set(&val);
+
+	valIdx++;
+	if(valIdx >= 3) {
+		valIdx = 0;
 	}
 }

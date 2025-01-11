@@ -4,7 +4,8 @@ thisDirPath=$(dirname "$thisPath")
 demos="\
 00_hello_world \
 01_blink \
-02_rgb_led"
+02_rgb_led \
+03_task_scheduling"
 
 echoerr() { echo "$@" 1>&2; }
 

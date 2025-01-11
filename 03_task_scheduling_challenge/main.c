@@ -54,12 +54,14 @@ static void _thread_in_enter(void *dummy1, void *dummy2, void *dummy3) {
 	ARG_UNUSED(dummy1);
 	ARG_UNUSED(dummy2);
 	ARG_UNUSED(dummy3);
-	int32_t d;
+	char c;
 	printf("Enter LED delay(ms):");
 	while(1) {
-		scanf("%d\n", &d);
-		_delayTimeMs = d;
-		printf("Led delay updated to(ms): %d", _delayTimeMs);
+		c = getchar();
+		// ignore unprintable characters
+		if(c < 33 || c >= 127)
+			continue;
+		putchar(c);
 	}
 }
 static void _thread_led_enter(void *dummy1, void *dummy2, void *dummy3) {

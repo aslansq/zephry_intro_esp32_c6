@@ -43,6 +43,7 @@ uint8_t bsp_rgb_led_init(void) {
 }
 
 void bsp_rgb_led_set(bsp_rgb_led_color_s *val) {
+	unsigned int key = irq_lock();
 	uint32_t data = 0;
 	data |= (val->g << 16);
 	data |= (val->r << 8);
@@ -55,6 +56,7 @@ void bsp_rgb_led_set(bsp_rgb_led_color_s *val) {
 		}
 		data = data << 1;
 	}
+	irq_unlock(key);
 	RESET();
 }
 
@@ -68,22 +70,27 @@ void bsp_rgb_led_change(void) {
 	val.r = 0;
 	val.g = 0;
 	val.b = 0;
+	if(valIdx >= 3) {
+		valIdx = 0;
+	}
 	switch(valIdx) {
 		case 0:
 			val.r = 255;
-		break;
+			break;
 		case 1:
 			val.g = 255;
-		break;
+			break;
 		case 2:
 			val.b = 255;
-		break;
+			break;
+		default:
+			val.r = 255;
+			val.g = 255;
+			val.b = 255;
+			break;
 	}
 
 	bsp_rgb_led_set(&val);
 
 	valIdx++;
-	if(valIdx >= 3) {
-		valIdx = 0;
-	}
 }

@@ -3,6 +3,8 @@ Zephyr RTOS introduction
 
 This repository implements concepts from Digi-Key RTOS introduction in Zephyr RTOS.
 
+See FreeRTOS version of this at [freertos_intro_qemu](https://github.com/aslansq/freertos_intro_qemu)
+
 [Introduction to RTOS | Digi-Key Electronics](https://www.youtube.com/playlist?list=PLEBQazB0HUyQ4hAPU1cJED6t3DU0h34bz)
 
 ## Prerequisites

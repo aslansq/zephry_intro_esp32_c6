@@ -1,6 +1,9 @@
 thisPath=$(realpath "$0")
 thisDirPath=$(dirname "$thisPath")
 
+demos="\
+00_hello_world"
+
 echoerr() { echo "$@" 1>&2; }
 
 ungracefulExit()
@@ -15,6 +18,11 @@ echoWTab()
     while IFS= read -r line; do
     echo -e "\t$line"
     done <<< "$@"
+}
+
+getDefaultDemoPath()
+{
+    echo $thisDirPath/../00_hello_world
 }
 
 getPrjRoot()

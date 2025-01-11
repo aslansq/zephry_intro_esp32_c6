@@ -2,7 +2,8 @@ thisPath=$(realpath "$0")
 thisDirPath=$(dirname "$thisPath")
 
 demos="\
-00_hello_world"
+00_hello_world \
+01_blink"
 
 echoerr() { echo "$@" 1>&2; }
 

@@ -41,9 +41,9 @@ then
 fi
 
 # hard clean
-rm -rf ${demoPath}/build
+rm -rf $(getPrjRoot)/build
 
-west build --sysbuild -p -b esp32c6_devkitc $(getPrjRoot) --build-dir ${demoPath}/build -- \
+west build --sysbuild -p -b esp32c6_devkitc $(getPrjRoot) -- \
 -DOPENOCD=${OPENOCD_ESP32_PATH}/bin/openocd \
 -DOPENOCD_DEFAULT_PATH=${OPENOCD_ESP32_PATH}/share/openocd/scripts
 if [ $? != 0 ]

@@ -9,35 +9,10 @@ then
     exit 1
 fi
 
-if [ -z "$1" ]
-then
-    ungracefulExit "demo not given"
-else
-    demoPath=$(realpath "$1")
-fi
-
-if [ ! -d "${demoPath}" ]
-then
-    ungracefulExit "demo path does not exist. ${demoPath}"
-fi
-
 setupZ
 if [ $? != 0 ]
 then
     ungracefulExit "setupZ"
-fi
-
-if [ ! -d ${demoPath}/build ]
-then
-    ungracefulExit "project not build"
-fi
-# remove, dont warn me if not exist
-rm -f $(getPrjRoot)/build
-
-ln -s ${demoPath}/build $(getPrjRoot)/build
-if [ $? != 0 ]
-then
-    ungracefulExit "symlink"
 fi
 
 west espressif monitor

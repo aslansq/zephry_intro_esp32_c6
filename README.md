@@ -32,7 +32,7 @@ cd ~/zephyrproject/zephyr_intro_esp32c6 && chmod +x shell/*.sh
 
 ## How To Run
 ```
-$ ./shell/build.sh ./03_task_scheduling && ./shell/flash.sh ./03_task_scheduling && ./shell/mon.sh ./03_task_scheduling
+$ ./shell/build.sh ./03_task_scheduling && ./shell/flash.sh && ./shell/mon.sh
 *Barka*deer *brig A*rr bo*oty r*um.
 Barkadeer brig Arr booty rum.
 *****B*arkade*er br*ig Ar*r boot*y rum*.

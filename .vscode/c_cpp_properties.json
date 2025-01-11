@@ -1,0 +1,10 @@
+{
+	"configurations": [
+		{
+			"name":"zephyr",
+			"compileCommands": "${workspaceFolder}/build/zephyr_intro_esp32c6/compile_commands.json",
+		}
+	],
+	"version": 4,
+	"enableConfigurationSquiggles": true
+}

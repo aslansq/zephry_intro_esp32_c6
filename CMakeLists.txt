@@ -6,3 +6,6 @@ find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
 project(demo)
 
 include(demo.cmake)
+
+target_sources(app PRIVATE "bsp_rgb_led.c")
+target_include_directories(app PUBLIC "${CMAKE_SOURCE_DIR}")

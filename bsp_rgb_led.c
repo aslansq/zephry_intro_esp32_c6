@@ -34,8 +34,8 @@ uint8_t bsp_rgb_led_init(void) {
 		PIN_NUM,
 		GPIO_OUTPUT_ACTIVE
 	);
-	RESET();
 	if(ret == 0) {
+		RESET();
 		bsp_rgb_led_set(&val);
 	}
 

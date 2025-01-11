@@ -1,0 +1,19 @@
+{
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Debug",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/build/zephyr_intro_esp32c6/zephyr/zephyr.elf",
+			"cwd": "${workspaceFolder}",
+			"miDebuggerPath": "${env:HOME}/zephyr-sdk-0.17.0/riscv64-zephyr-elf/bin/riscv64-zephyr-elf-gdb-py",
+			"miDebuggerServerAddress": "localhost:3333",
+			"stopAtEntry": true,
+			"preLaunchTask": "RunDebugServer"
+		}
+	]
+}

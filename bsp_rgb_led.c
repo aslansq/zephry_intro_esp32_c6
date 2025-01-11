@@ -8,7 +8,7 @@
 static const struct device *gpio_ct_dev = DEVICE_DT_GET(DT_NODELABEL(gpio0));
 // we need to do delay with macros because required delays are two fast
 #define DELAY(x)    for(uint64_t delayIdx = 0; delayIdx < (x); ++delayIdx) {__asm__("nop");}
-#define SET_PIN(st) gpio_pin_set_raw(gpio_ct_dev,PIN_NUM,st)
+#define SET_PIN(st) gpio_pin_set_raw(gpio_ct_dev,PIN_NUM,(st))
 // magic numbers oh well: I just look with scope to meet timing requirements
 // see requirements below
 // https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf

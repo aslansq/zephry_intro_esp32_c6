@@ -8,6 +8,7 @@ See FreeRTOS version of this at [freertos_intro_qemu](https://github.com/aslansq
 [Introduction to RTOS | Digi-Key Electronics](https://www.youtube.com/playlist?list=PLEBQazB0HUyQ4hAPU1cJED6t3DU0h34bz)
 
 ## Demos
+**Some of the demos make board application to fail. Hold user button, then press reset button to switch download mode to recover.**
 |Name|Description|
 |-|-|
 |00_hello_world|Prints hello world every 1 second|
@@ -17,6 +18,10 @@ See FreeRTOS version of this at [freertos_intro_qemu](https://github.com/aslansq
 |03_task_scheduling_challenge|Reads delay value from console and changes colors with that delay|
 |04_memory_1|Stack overflow by infinite recursive call|
 |04_memory_2|Stack overflow by allocating huge arrary in a thread|
+|04_memory_3|Heap overflow uint32 at a time in a thread|
+|04_memory_4|Heap overflow single shot in a thread|
+|04_memory_challenge|Sharing message between threads|
+
 
 ## Prerequisites
 1. Follow [getting](https://docs.zephyrproject.org/latest/develop/getting_started/index.html) started guide from zephyrproject to setup environment.

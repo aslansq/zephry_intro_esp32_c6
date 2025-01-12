@@ -101,3 +101,29 @@ char bsp_getchar(void) {
 	uart_rx_one_char(&c);
 	return c;
 }
+
+int16_t bsp_getline(char *buf, uint8_t size) {
+	int16_t ret = 0;
+	char c = bsp_getchar();
+	uint8_t bufIdx;
+	for(bufIdx = 0; bufIdx < size;) {
+		// ignore non ascii chars
+		if(c < 0 || c > 127 || c == '\r') {
+			// do nothing
+		} else if(c == '\n') {
+			buf[bufIdx] = '\0';
+			bufIdx++;
+			ret = bufIdx;
+			break;
+		} else if(bufIdx == (size-1)){
+			ret = -1;
+			break;
+		} else {
+			buf[bufIdx] = c;
+			bufIdx++;
+		}
+		c = bsp_getchar();
+		k_yield();
+	}
+	return ret;
+}

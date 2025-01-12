@@ -6,7 +6,6 @@ find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
 project(demo)
 
 include(demo.cmake)
-
 target_sources(app PRIVATE "bsp.c")
 target_include_directories(app PUBLIC "${CMAKE_SOURCE_DIR}")
 target_include_directories(app PUBLIC "${CMAKE_SOURCE_DIR}/../modules/hal/espressif/components/esp_rom/include/esp32c6/rom/")

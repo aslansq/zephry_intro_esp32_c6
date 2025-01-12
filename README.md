@@ -7,6 +7,17 @@ See FreeRTOS version of this at [freertos_intro_qemu](https://github.com/aslansq
 
 [Introduction to RTOS | Digi-Key Electronics](https://www.youtube.com/playlist?list=PLEBQazB0HUyQ4hAPU1cJED6t3DU0h34bz)
 
+## Demos
+|Name|Description|
+|-|-|
+|00_hello_world|Prints hello world every 1 second|
+|01_blink|Toggles gpio10 every 1 second|
+|02_rgb_led|Changes color of the led every 1 second|
+|03_task_scheduling|Demos pre-emption of threads|
+|03_task_scheduling_challenge|Reads delay value from console and changes colors with that delay|
+|04_memory_1|Stack overflow by infinite recursive call|
+|04_memory_2|Stack overflow by allocating huge arrary in a thread|
+
 ## Prerequisites
 1. Follow [getting](https://docs.zephyrproject.org/latest/develop/getting_started/index.html) started guide from zephyrproject to setup environment.
 2. Clone project under zephyr project.  
@@ -47,3 +58,6 @@ Barkadeer brig Arr booty rum.
 thread1 abort
 ****************************
 ```
+
+[comment]: <> (ESPRESSIF)
+[comment]: <> (ESP32-C6-DevKitC-1)

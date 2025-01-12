@@ -7,7 +7,8 @@ demos="\
 02_rgb_led \
 03_task_scheduling \
 03_task_scheduling_challenge \
-04_memory_1"
+04_memory_1 \
+04_memory_2"
 
 echoerr() { echo "$@" 1>&2; }
 

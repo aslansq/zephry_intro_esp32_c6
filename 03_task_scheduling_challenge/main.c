@@ -1,6 +1,7 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <zephyr/kernel.h>
-#include "bsp_rgb_led.h"
+#include "bsp.h"
 
 #define DEFAULT_THREAD_STACK_SIZE (1024u)
 #define INPUT_PRIO (6u)
@@ -55,13 +56,24 @@ static void _thread_in_enter(void *dummy1, void *dummy2, void *dummy3) {
 	ARG_UNUSED(dummy2);
 	ARG_UNUSED(dummy3);
 	char c;
+	char buf[10];
+	uint8_t bufIdx = 0;
 	printf("Enter LED delay(ms):");
 	while(1) {
-		c = getchar();
-		// ignore unprintable characters
-		if(c < 33 || c >= 127)
-			continue;
-		putchar(c);
+		c = bsp_getchar();
+		if(c == '\n' && bufIdx != 0) {
+			buf[bufIdx] = '\0';
+			bufIdx = 0;
+			_delayTimeMs = atoi(buf);
+			printf("\nLed delay updated to(ms): %d", _delayTimeMs);
+			printf("\nEnter LED delay(ms):");
+		} else 	if(c < '0' || c > '9') {
+
+		} else {
+			buf[bufIdx] = c;
+			bufIdx++;
+			putchar(c);
+		}
 	}
 }
 static void _thread_led_enter(void *dummy1, void *dummy2, void *dummy3) {

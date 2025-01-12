@@ -1,5 +1,5 @@
-#ifndef BSP_RGB_LED_H
-#define BSP_RGB_LED_H
+#ifndef BSP_H
+#define BSP_H
 
 #include <stdint.h>
 
@@ -12,6 +12,7 @@ typedef struct {
 uint8_t bsp_rgb_led_init(void);
 void bsp_rgb_led_set(bsp_rgb_led_color_s *val);
 void bsp_rgb_led_change(void);
+char bsp_getchar(void);
 
-#endif // BSP_RGB_LED_H
+#endif // BSP_H
 

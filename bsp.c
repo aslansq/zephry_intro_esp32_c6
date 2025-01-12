@@ -1,5 +1,6 @@
 
-#include "bsp_rgb_led.h"
+#include "bsp.h"
+#include "uart.h"
 #include <zephyr/device.h>
 #include <zephyr/kernel.h>
 #include <zephyr/drivers/gpio.h>
@@ -93,4 +94,10 @@ void bsp_rgb_led_change(void) {
 	bsp_rgb_led_set(&val);
 
 	valIdx++;
+}
+
+char bsp_getchar(void) {
+	char c = -1;
+	uart_rx_one_char(&c);
+	return c;
 }

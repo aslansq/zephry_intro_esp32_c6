@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <zephyr/kernel.h>
-#include <bsp_rgb_led.h>
+#include <bsp.h>
 
 #define DEFAULT_THREAD_STACK_SIZE (1024u)
 // lower number, higher priority

@@ -21,6 +21,7 @@ See FreeRTOS version of this at [freertos_intro_qemu](https://github.com/aslansq
 |04_memory_3|Heap overflow uint32 at a time in a thread|
 |04_memory_4|Heap overflow single shot in a thread|
 |04_memory_challenge|Sharing message between threads|
+|05_pipe|Pipe is equivalent of FreeRTOS xQueue|
 
 
 ## Prerequisites

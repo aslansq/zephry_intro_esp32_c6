@@ -9,6 +9,13 @@ then
     exit 1
 fi
 
+# always execute from project root
+cd $(getPrjRoot)
+if [ $? != 0 ]
+then
+    ungracefulExit "cd project root"
+fi
+
 note=""
 
 for demo in ${demos}

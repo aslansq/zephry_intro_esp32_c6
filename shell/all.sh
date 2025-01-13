@@ -21,5 +21,11 @@ if [ ! -d "${demoPath}" ]
 then
     ungracefulExit "demo path does not exist. ${demoPath}"
 fi
+# always execute from project root
+cd $(getPrjRoot)
+if [ $? != 0 ]
+then
+    ungracefulExit "cd project root"
+fi
 
 $thisDirPath/build.sh ${demoPath} && $thisDirPath/flash.sh && $thisDirPath/mon.sh

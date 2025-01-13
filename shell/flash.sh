@@ -20,6 +20,13 @@ then
     ungracefulExit "no build found"
 fi
 
+// always execute from project root
+cd $(getPrjRoot)
+if [ $? != 0 ]
+then
+    ungracefulExit "cd project root"
+fi
+
 west flash --build-dir $(getPrjRoot)/build
 if [ $? != 0 ]
 then

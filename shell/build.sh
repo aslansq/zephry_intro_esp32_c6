@@ -40,6 +40,13 @@ then
     ungracefulExit "setupZ"
 fi
 
+# always execute from project root
+cd $(getPrjRoot)
+if [ $? != 0 ]
+then
+    ungracefulExit "cd project root"
+fi
+
 # hard clean
 rm -rf $(getPrjRoot)/build
 

@@ -23,7 +23,7 @@ See FreeRTOS version of this at [freertos_intro_qemu](https://github.com/aslansq
 |04_memory_challenge|Sharing message between threads|
 |05_pipe|Pipe is equivalent of FreeRTOS xQueue. Communication between threads using pipes|
 |05_pipe_challenge|Pipe is equivalent of FreeRTOS xQueue. One thread controls led, other thread handles user input. Two threads communicate using pipes.|
-
+|06_mutex_race|Race conditions demo. Shared variable increased and printed to console.|
 
 ## Prerequisites
 1. Follow [getting](https://docs.zephyrproject.org/latest/develop/getting_started/index.html) started guide from zephyrproject to setup environment.

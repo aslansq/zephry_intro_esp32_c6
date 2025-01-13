@@ -26,6 +26,7 @@ See FreeRTOS version of this at [freertos_intro_qemu](https://github.com/aslansq
 |06_mutex_race|Race conditions demo. Shared variable increased and printed to console.|
 |06_mutex|Mutex used to solve race condition at 06_mutex_race|
 |06_mutex_challenge|Creating a blink thread inside of setup thread. Passing an argument to blink thread from setup's stack. Mutex used to prevent delay variable does not go out of scope before blink thread has read.|
+|07_semaphore|Counting semaphore demo. Passing message to print threads from setup's stack. Counting semaphore used to prevent message does not go out of scope before print thread has run.|
 ## Prerequisites
 1. Follow [getting](https://docs.zephyrproject.org/latest/develop/getting_started/index.html) started guide from zephyrproject to setup environment.
 2. Clone project under zephyr project.  

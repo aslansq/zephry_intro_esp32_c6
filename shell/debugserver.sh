@@ -9,7 +9,7 @@ then
     exit 1
 fi
 
-// always execute from project root
+# always execute from project root
 cd $(getPrjRoot)
 if [ $? != 0 ]
 then

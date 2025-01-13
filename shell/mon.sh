@@ -15,7 +15,7 @@ then
     ungracefulExit "setupZ"
 fi
 
-// always execute from project root
+# always execute from project root
 cd $(getPrjRoot)
 if [ $? != 0 ]
 then

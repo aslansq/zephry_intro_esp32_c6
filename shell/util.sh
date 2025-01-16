@@ -13,7 +13,13 @@ demos="\
 04_memory_4 \
 04_memory_challenge \
 05_pipe \
-05_pipe_challenge"
+05_pipe_challenge \
+06_mutex \
+06_mutex_challenge \
+06_mutex_race \
+07_semaphore \
+07_semaphore_challenge \
+08_sw_timers"
 
 echoerr() { echo "$@" 1>&2; }
 

@@ -4,40 +4,29 @@
 #include <zephyr/device.h>
 #include <zephyr/drivers/gpio.h>
 
-#define PIN_NUM 10
-
-static const struct device *gpio_ct_dev = 
-	DEVICE_DT_GET(DT_NODELABEL(gpio0));
+// see esp32c6_devkitc.overlay for pin definition
+static const struct gpio_dt_spec led = 
+	GPIO_DT_SPEC_GET(DT_NODELABEL(blinking_led), gpios);
 
 int main(void)
 {
-	int32_t ret;
-	uint8_t st = 0;
+	int ret;
 	int count = 0;
 
-	if(!device_is_ready(gpio_ct_dev)) {
+	if(!device_is_ready(led.port)) {
 		printf("Fail: ready\n");
 	}
 
-	ret = gpio_pin_configure(
-		gpio_ct_dev,
-		PIN_NUM,
-		GPIO_OUTPUT_ACTIVE
-	);
+	ret = gpio_pin_configure_dt(&led, GPIO_OUTPUT_ACTIVE);
 
 	if(ret != 0) {
 		printf("Fail: cfg\n");
 	}
 
 	while (1) {
-		st = (st == 0) ? 1 : 0;
-		ret = gpio_pin_set_raw(
-			gpio_ct_dev,
-			PIN_NUM,
-			st
-		);
+		ret = gpio_pin_toggle_dt(&led);
 		if(ret != 0) {
-			printf("Fail: set\n");
+			printf("Fail: toggle\n");
 		}
 		printf("%d\n", count);
 		k_msleep(1000);

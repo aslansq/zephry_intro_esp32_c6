@@ -19,7 +19,8 @@ demos="\
 06_mutex_race \
 07_semaphore \
 07_semaphore_challenge \
-08_sw_timers"
+08_sw_timers \
+09_hw_int_timer"
 
 echoerr() { echo "$@" 1>&2; }
 

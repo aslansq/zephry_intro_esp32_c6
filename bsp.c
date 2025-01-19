@@ -1,9 +1,13 @@
 
 #include "bsp.h"
-#include "uart.h"
 #include <zephyr/device.h>
 #include <zephyr/kernel.h>
 #include <zephyr/drivers/gpio.h>
+#include <zephyr/drivers/uart.h>
+
+#define UART_DEVICE_NODE DT_CHOSEN(zephyr_console)
+
+static const struct device *const uart_dev = DEVICE_DT_GET(UART_DEVICE_NODE);
 
 #define PIN_NUM 8
 
@@ -97,8 +101,10 @@ void bsp_rgb_led_change(void) {
 }
 
 char bsp_getchar(void) {
-	char c = -1;
-	uart_rx_one_char(&c);
+	char c;
+	if(uart_poll_in(uart_dev, &c) != 0) {
+		c = -1;
+	}
 	return c;
 }
 

@@ -4,6 +4,10 @@
 #include <zephyr/kernel.h>
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/drivers/uart.h>
+#include "pcr_reg.h"
+#include "periph_defs.h"
+#include "timer_group_reg.h"
+#include <zephyr/devicetree.h>
 
 #define UART_DEVICE_NODE DT_CHOSEN(zephyr_console)
 
@@ -132,4 +136,50 @@ int16_t bsp_getline(char *buf, uint8_t size) {
 		k_yield();
 	}
 	return ret;
+}
+
+extern void timer1_handler(void);
+
+static void _bsp_timer1_handler(void *arg) {
+	ARG_UNUSED(arg);
+	REG_SET_BIT(TIMG_INT_CLR_TIMERS_REG(1), TIMG_T0_INT_CLR_M);
+	REG_SET_BIT(TIMG_T0CONFIG_REG(1), (TIMG_T0_EN_M | TIMG_T0_ALARM_EN_M));
+	timer1_handler();
+}
+
+void bsp_tm1_int_setup(void) {
+	REG_SET_BIT(PCR_TIMERGROUP1_CONF_REG, PCR_TG1_CLK_EN_M);
+	REG_CLR_BIT(PCR_TIMERGROUP1_CONF_REG, PCR_TG1_RST_EN_M);
+	//printk("pcr cfg %u\n", REG_READ(PCR_TIMERGROUP1_CONF_REG));
+	REG_SET_BIT(PCR_TIMERGROUP1_TIMER_CLK_CONF_REG, PCR_TG1_TIMER_CLK_EN_M);
+	REG_SET_BIT(PCR_TIMERGROUP1_TIMER_CLK_CONF_REG, (1<<PCR_TG1_TIMER_CLK_SEL_S));
+	//printk("pcr clk cfg %u\n", REG_READ(PCR_TIMERGROUP1_TIMER_CLK_CONF_REG));
+
+	REG_WRITE(TIMG_T0CONFIG_REG(1), 0);
+	REG_SET_BIT(TIMG_T0CONFIG_REG(1), (
+		(2000<<TIMG_T0_DIVIDER_S) | // 80 MHz / 2000 = 40 kHz
+		TIMG_T0_DIVCNT_RST_M |
+		TIMG_T0_INCREASE_M |
+		TIMG_T0_ALARM_EN_M
+	));
+	//printk("tm1 cfg %u\n", REG_READ(TIMG_T0CONFIG_REG(1)));
+
+	REG_WRITE(TIMG_T0ALARMLO_REG(1), 40000); // 1 sec
+	REG_WRITE(TIMG_T0ALARMHI_REG(1), 0);
+	//printk("tm1 alm lo %u\n", REG_READ(TIMG_T0ALARMLO_REG(1)));
+	//printk("tm1 alm hi %u\n", REG_READ(TIMG_T0ALARMHI_REG(1)));
+
+	REG_SET_BIT(TIMG_INT_ENA_TIMERS_REG(1), TIMG_T0_INT_ENA_M);
+	//printk("tm1 int ena %u\n", REG_READ(TIMG_INT_ENA_TIMERS_REG(1)));
+
+	REG_WRITE(TIMG_T0LOADLO_REG(1), 0);
+	//printk("tm1 load lo %u\n", REG_READ(TIMG_T0LOADLO_REG(1)));
+	REG_WRITE(TIMG_T0LOADHI_REG(1), 0);
+	//printk("tm1 load hi %u\n", REG_READ(TIMG_T0LOADHI_REG(1)));
+
+	REG_SET_BIT(TIMG_T0CONFIG_REG(1), (TIMG_T0_EN_M | TIMG_T0_AUTORELOAD_M));
+	//printk("tm1 cfg %u\n", REG_READ(TIMG_T0CONFIG_REG(1)));
+
+	IRQ_CONNECT(ETS_TG1_T0_LEVEL_INTR_SOURCE, 2, _bsp_timer1_handler, NULL, 0);
+	irq_enable(ETS_TG1_T0_LEVEL_INTR_SOURCE);
 }

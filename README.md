@@ -27,6 +27,10 @@ See FreeRTOS version of this at [freertos_intro_qemu](https://github.com/aslansq
 |06_mutex|Mutex used to solve race condition at 06_mutex_race|
 |06_mutex_challenge|Creating a blink thread inside of setup thread. Passing an argument to blink thread from setup's stack. Mutex used to prevent delay variable does not go out of scope before blink thread has read.|
 |07_semaphore|Counting semaphore demo. Passing message to print threads from setup's stack. Counting semaphore used to prevent message does not go out of scope before print thread has run.|
+|08_sw_timers|One shot and auto reload timer demo.|
+|08_sw_timers_challenge|When user starts typing turn on backlight(led). If there is 5 seconds of inactivity turn off the backlight using sw timers.|
+|09_hw_int|Timer alarm interrupting a thread demo.|
+
 ## Prerequisites
 1. Follow [getting](https://docs.zephyrproject.org/latest/develop/getting_started/index.html) started guide from zephyrproject to setup environment.
 2. Clone project under zephyr project.  

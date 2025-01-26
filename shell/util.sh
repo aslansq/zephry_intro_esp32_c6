@@ -20,7 +20,7 @@ demos="\
 07_semaphore \
 07_semaphore_challenge \
 08_sw_timers \
-09_hw_int_timer"
+09_hw_int"
 
 echoerr() { echo "$@" 1>&2; }
 

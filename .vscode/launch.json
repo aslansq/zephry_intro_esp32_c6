@@ -10,9 +10,34 @@
 			"request": "launch",
 			"program": "${workspaceFolder}/build/zephyr_intro_esp32c6/zephyr/zephyr.elf",
 			"cwd": "${workspaceFolder}",
-			"miDebuggerPath": "${env:HOME}/zephyr-sdk-0.17.0/riscv64-zephyr-elf/bin/riscv64-zephyr-elf-gdb-py",
-			"miDebuggerServerAddress": "localhost:3333",
-			"stopAtEntry": true,
+			"miDebuggerPath": "${env:HOME}/zephyr-sdk-0.17.0/riscv64-zephyr-elf/bin/riscv64-zephyr-elf-gdb",
+			"setupCommands": [
+				{
+					"description": "t",
+					"text": "target extended-remote :3333",
+					"ignoreFailures": false
+				},
+				{
+					"description": "s",
+					"text": "symbol-file /home/aslan/zephyrproject/zephyr_intro_esp32c6/build/zephyr_intro_esp32c6/zephyr/zephyr.elf",
+					"ignoreFailures": false
+				},
+				{
+					"description": "r",
+					"text": "mon reset halt",
+					"ignoreFailures": false
+				},
+				{
+					"description": "f",
+					"text": "maintenance flush register-cache",
+					"ignoreFailures": false
+				},
+				{
+					"description": "b",
+					"text": "break main",
+					"ignoreFailures": false
+				}
+			],
 			"preLaunchTask": "RunDebugServer"
 		}
 	]

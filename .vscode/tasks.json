@@ -21,7 +21,7 @@
 					"background": {
 						"activeOnStart": true,
 						"beginsPattern": ".",
-						"endsPattern": "Listening on port 3333 for gdb connections",
+						"endsPattern": "Info : Listening on port",
 					}
 				}
 			]
